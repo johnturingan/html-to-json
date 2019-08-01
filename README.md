@@ -69,6 +69,10 @@ promise.then((response) => {
     * default false
     * If set to true, it will output your file as a javascript variable. Otherwise, json file
 
+* `with_version` (optional)
+    * default false
+    * if true, this will version the output and will create rev-manifest.json inside dest folder
+
 * `include_paths` (optional)
     * Takes a String or an Array of paths.
     * If set, html-to-json-converter will use these folders as base path when searching for files.

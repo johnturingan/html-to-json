@@ -195,18 +195,19 @@ HtmlToJson.prototype = {
 
                 let hash = revHash(content_output), versioned;
 
-                if (this.options.with_version) {
-
-                    versioned = name + '-' + hash;
-                    rev[name] = versioned;
-                    name = versioned;
-                }
-
                 if (this.options.as_variable) {
 
                     content_output = "var " + name + "=" +  content_output;
                     ext = '.js';
                 }
+
+                if (this.options.with_version) {
+
+                    versioned = name + '-' + hash;
+                    rev[name + ext] = versioned + ext;
+                    name = versioned;
+                }
+
 
                 let filename = this.dest + name + ext;
 
