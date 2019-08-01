@@ -1,4 +1,4 @@
-# html-to-json
+# html-to-json-converter
 
 >Makes inclusion of files easy and fast.
 Compile html files and wrap it all in a single json file.
@@ -19,18 +19,18 @@ Install :traffic_light:
 -------
 
 ```bash
-$ npm install html-2-json --save
+$ npm install html-to-json-converter --save
 ```
 
 
 ## Usage
-html-to-json has 2 methods available for usage depending on your needs.
+html-to-json-converter has 2 methods available for usage depending on your needs.
 
 * *htmlToJson.compile()* - Compile html to json and saves the output on the destination folder you specified
 * *htmlToJson.yield()* - Compile html to json then return the content output as promise.
 
 ```javascript
-const htmlToJson = require('html-2-json');
+const htmlToJson = require('html-to-json-converter');
 
 let engine = new htmlToJson({
     src: './**/*.tpl',
@@ -71,7 +71,7 @@ promise.then((response) => {
 
 * `include_paths` (optional)
     * Takes a String or an Array of paths.
-    * If set, html-to-json will use these folders as base path when searching for files.
+    * If set, html-to-json-converter will use these folders as base path when searching for files.
 
 
 

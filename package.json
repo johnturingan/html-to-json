@@ -1,5 +1,5 @@
 {
-  "name": "html-2-json",
+  "name": "html-to-json-converter",
   "version": "1.0.0",
   "description": "Converts html contents to json object. Compile html files and wrap it all in a single json file. ",
   "homepage": "https://github.com/johnturingan/html-to-json",
