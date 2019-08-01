@@ -112,6 +112,10 @@ function HtmlToJson (config) {
     this.dest = config.dest;
     this.prefix = config.prefix;
     this.options = config.options;
+
+    if (!fs.existsSync(this.dest)){
+        fs.mkdirSync(this.dest);
+    }
 }
 
 
@@ -176,6 +180,8 @@ HtmlToJson.prototype = {
                 }
 
                 let filename = this.dest + name + ext;
+
+
 
                 fs.writeFile(filename, content_output, (e) => {
 
