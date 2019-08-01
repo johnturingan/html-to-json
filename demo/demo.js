@@ -5,8 +5,9 @@ let service = new htmlToJson({
     src: './**/*.tpl',
     dest: './demo/output/',
     options: {
-        include_paths: false,
-        as_variable: false
+        as_variable: false,
+        with_version: true,
+        include_paths: false //'./demo/templates/partial'
     }
 });
 

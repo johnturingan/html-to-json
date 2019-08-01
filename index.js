@@ -2,6 +2,7 @@ const glob = require('glob');
 const fs = require('fs');
 const path = require("path");
 const frontMatter = require('front-matter');
+const revHash = require('rev-hash');
 
 const DIRECTIVE_REGEX = /^(.*=\s*([\w\.\*\/-]+)\s*:\s*([\w\.\*\/-]+\.html?\s*))$/gm;
 
@@ -34,7 +35,25 @@ class Processor {
             // Use include path as base relative path
             // for each html template path
 
+            let include_paths = this.options.include_paths;
+
             if (this.options.include_paths) {
+
+                if (typeof include_paths == "string") {
+                    // Arrayfy the string
+                    include_paths = [include_paths];
+                }
+
+                include_paths.forEach((item) => {
+
+                    let include_path = path.join(item, matches[3].replace(/['"]/g, '')).trim();
+
+                    if (fs.existsSync(include_path)) {
+
+                        let res = glob.sync(include_path, {mark: true});
+                        file_matches = file_matches.concat(res);
+                    }
+                });
 
             } else {
 
@@ -158,6 +177,7 @@ HtmlToJson.prototype = {
         }
 
         let response = {};
+        let rev = {};
 
         files.forEach((i) => {
 
@@ -173,6 +193,15 @@ HtmlToJson.prototype = {
 
                 content_output = JSON.stringify(content_output);
 
+                let hash = revHash(content_output), versioned;
+
+                if (this.options.with_version) {
+
+                    versioned = name + '-' + hash;
+                    rev[name] = versioned;
+                    name = versioned;
+                }
+
                 if (this.options.as_variable) {
 
                     content_output = "var " + name + "=" +  content_output;
@@ -181,15 +210,14 @@ HtmlToJson.prototype = {
 
                 let filename = this.dest + name + ext;
 
-
-
                 fs.writeFile(filename, content_output, (e) => {
 
                     if (e) {
+
                         console.error(e); return;
                     }
 
-                    console.log("File has been created");
+                    console.log(`${name} saved to ${this.dest}`);
 
                 });
 
@@ -200,8 +228,26 @@ HtmlToJson.prototype = {
         });
 
         if (typeof cb  === 'function') {
-            cb(response);
+
+            return cb(response);
         }
+
+        this.generateManifest(rev);
+    },
+
+    generateManifest (rev) {
+
+        if (!this.options.with_version) return;
+
+        fs.writeFile(this.dest + 'rev-manifest.json', JSON.stringify(rev), (e) => {
+
+            if (e) {
+                console.error(e); return;
+            }
+
+            console.log(`Manifest file has been created`);
+
+        });
     }
 
 };

@@ -1,6 +1,6 @@
 {
   "name": "html-to-json-converter",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Converts html contents to json object. Compile html files and wrap it all in a single json file. ",
   "homepage": "https://github.com/johnturingan/html-to-json",
   "repository": {
@@ -28,7 +28,8 @@
     "glob": "^7.1.4",
     "marked": "^0.7.0",
     "plugin-error": "^1.0.1",
-    "replace-ext": "^1.0.0"
+    "replace-ext": "^1.0.0",
+    "rev-hash": "^3.0.0"
   },
   "readmeFilename": "README.md",
   "bugs": {
