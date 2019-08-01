@@ -1,0 +1,37 @@
+{
+  "name": "html-to-json",
+  "version": "1.0.0",
+  "description": "Converts html contents to json object. Compile html files and wrap it all in a single json file. ",
+  "homepage": "https://github.com/johnturingan/html-to-json",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:johnturingan/gulp-html-to-json.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "keywords": [
+    "html to json",
+    "html",
+    "json"
+  ],
+  "author": {
+    "name": "John Turingan",
+    "url": "http://scriptsandpixels.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "ansi-colors": "^4.1.1",
+    "event-stream": "^4.0.1",
+    "front-matter": "^3.0.2",
+    "glob": "^7.1.4",
+    "marked": "^0.7.0",
+    "plugin-error": "^1.0.1",
+    "replace-ext": "^1.0.0"
+  },
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/johnturingan/html-to-json/issues"
+  }
+}
