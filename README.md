@@ -11,7 +11,7 @@ include only the html files you want for that specific group.
 >
 ```
 $ cd demo
-$ node demo.js 
+$ node demo.js
 ```
 Just make sure the you already install all node modules including Dev Dependencies
 
@@ -19,18 +19,18 @@ Install :traffic_light:
 -------
 
 ```bash
-$ npm install html-to-json --save
+$ npm install html-2-json --save
 ```
 
 
 ## Usage
-html-to-json has 2 methods available for usage depending on your needs. 
+html-to-json has 2 methods available for usage depending on your needs.
 
 * *htmlToJson.compile()* - Compile html to json and saves the output on the destination folder you specified
 * *htmlToJson.yield()* - Compile html to json then return the content output as promise.
 
 ```javascript
-const htmlToJson = require('html-to-json');
+const htmlToJson = require('html-2-json');
 
 let engine = new htmlToJson({
     src: './**/*.tpl',
@@ -57,14 +57,14 @@ promise.then((response) => {
 
 ##### Parameters:
 * `src` (required)
-	* source of the template group file 
+	* source of the template group file
 	* can use glob
 
 * `dest` (required if using compile method)
     * destination folder of compiled json
     * trailing / is a must
 
-##### Options    
+##### Options
 * `as_variable` (optional)
     * default false
     * If set to true, it will output your file as a javascript variable. Otherwise, json file

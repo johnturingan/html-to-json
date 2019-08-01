@@ -1,11 +1,11 @@
 {
-  "name": "html-to-json",
+  "name": "html-2-json",
   "version": "1.0.0",
   "description": "Converts html contents to json object. Compile html files and wrap it all in a single json file. ",
   "homepage": "https://github.com/johnturingan/html-to-json",
   "repository": {
     "type": "git",
-    "url": "git@github.com:johnturingan/gulp-html-to-json.git"
+    "url": "git@github.com:johnturingan/html-to-json.git"
   },
   "main": "index.js",
   "scripts": {
