@@ -10,4 +10,12 @@ let service = new htmlToJson({
     }
 });
 
+// generate output file
 service.compile();
+
+// return content as promise
+let promise = service.yield();
+promise.then((response) => {
+
+    console.log(response);
+});

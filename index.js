@@ -132,41 +132,70 @@ HtmlToJson.prototype = {
             .then(this.readGroup.bind(this));
     },
 
-    readGroup (files) {
+    yield () {
+
+        return new Promise((resolve, reject) => {
+
+            this.templates()
+                .then((files) => {
+
+                    this.readGroup(files, (content) => {
+                        resolve(content);
+                    });
+                });
+        });
+    },
+
+    readGroup (files, cb) {
 
         if (!Array.isArray(files)) {
 
             throw Error('Template file is invalid');
         }
 
+        let response = {};
+
         files.forEach((i) => {
 
             let contents = fs.readFileSync(i, 'utf8'),
                 processor = new Processor(this.options),
-                content_output = JSON.stringify(processor.handle(contents, i))
+                content_output = processor.handle(contents, i),
+                name = Processor.keyVariable(i),
+                ext = '.json'
             ;
 
-            let name = Processor.keyVariable(i);
-            let ext = '.json';
 
-            if (this.options.as_variable) {
+            if (typeof cb  !== 'function') {
 
-                content_output = "var " + name + "=" +  content_output;
-                ext = '.js';
-            }
+                content_output = JSON.stringify(content_output);
 
-            let filename = this.dest + name + ext;
+                if (this.options.as_variable) {
 
-            fs.writeFile(filename, content_output, (e) => {
-
-                if (e) {
-                    console.error(e); return;
+                    content_output = "var " + name + "=" +  content_output;
+                    ext = '.js';
                 }
 
-                console.log("File has been created");
+                let filename = this.dest + name + ext;
 
-            });
+                fs.writeFile(filename, content_output, (e) => {
+
+                    if (e) {
+                        console.error(e); return;
+                    }
+
+                    console.log("File has been created");
+
+                });
+
+            } else  {
+
+                response[name] = content_output;
+            }
         });
+
+        if (typeof cb  === 'function') {
+            cb(response);
+        }
     }
 
 };
